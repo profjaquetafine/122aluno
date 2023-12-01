@@ -45,19 +45,10 @@ $(function () {
 
     $("#save_button").click(function () {
         save_data = {
-            "date": display_date,
-            "text": $("#text").val(),
-            "emotion": predicted_emotion
+           
         }
         $.ajax({
-            type: 'POST',
-            url: "/save-entry",
-            data: JSON.stringify(save_data),
-            dataType: "json",
-            contentType: 'application/json',
-            success: function () {
-                alert("Sua entrada foi salva com sucesso!")
-                window.location.reload()
+         
             },
             error: function (result) {
                 alert(result.responseJSON.message)
@@ -80,30 +71,14 @@ function displayBot() {
 function askBot() {
     $("#send_button").click(function () {
 
-        var user_bot_input_text = $("#bot_input_text").val()
-
-        if (user_bot_input_text != "") {
-           
-            $("#chat_messages").append('<div class="user__messages">' + user_bot_input_text + ' </div>')
-            
-            //Limpe a caixa de entrada de texto após enviar a mensagem
-            $("#bot_input_text").val('');
+      
 
             let chat_input_data = {
                 "user_bot_input_text": user_bot_input_text
             }
 
             $.ajax({
-                type: 'POST',
-                url: "/bot-response",
-                data: JSON.stringify(chat_input_data),
-                dataType: "json",
-                contentType: 'application/json',
-                    success: function (result) {
-                        
-                        $("#chat_messages").append('<div class="bot__messages">' + result.bot_response + ' </div>')                        
-                        $('.chatbox__messages__cotainer').animate({
-                            scrollTop: $('.chatbox__messages__cotainer')[0].scrollHeight}, 1000);
+              
                     },
                     error: function (result) {
                         alert(result.responseJSON.message)
